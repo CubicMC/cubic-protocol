@@ -42,7 +42,6 @@ world*
 
 .direnv
 .envrc
-.pre-commit-config.yaml
 result
 glados
 build
