@@ -36,12 +36,9 @@ CXXFLAGS += -Wconversion
 CXXFLAGS += -std=c++17
 CXXFLAGS += -Wp,-U_FORTIFY_SOURCE
 CXXFLAGS += -Wformat=2
-CXXFLAGS += -MMD -MP
-CXXFLAGS += -fno-builtin
 CXXFLAGS += -pipe
 CXXFLAGS += -march=native -mtune=native
 CXXFLAGS += -Wcast-qual
-CXXFLAGS += -Wconversion
 CXXFLAGS += -Wdisabled-optimization
 CXXFLAGS += -Werror=return-type
 CXXFLAGS += -Winit-self
