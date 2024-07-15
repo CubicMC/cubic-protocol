@@ -24,6 +24,12 @@ INC_FLAGS += -Iinclude -Isrc
 
 CPPFLAGS := $(INC_FLAGS) -MMD -MP
 
+ifeq ($(MC_VERSION), 1.21)
+CPPFLAGS += -DCUBIC_MC_VERSION=1.21 -DCUBIC_MC_PROTOCOL=767
+else
+$(error Minecraft version not supported or MC_VERSION env variable not set)
+endif
+
 CXXFLAGS := -Wall
 CXXFLAGS += -Wextra
 CXXFLAGS += -Wconversion
