@@ -10,7 +10,13 @@ jobs:
     steps:
       - run: sudo apt install make gcc # Add more deps when needed
       - uses: actions/checkout@v4
-      - run: DEBUG=0 ASAN=0 ANALYZER=0 LTO=1 make
+      - run: make
+        env:
+          MC_VERSION: 1.21
+          DEBUG: 0
+          ASAN: 0
+          ANALYZER: 0
+          LTO: 1
       # TODO: Export test coverage
 
   check_linux_test:
@@ -19,5 +25,11 @@ jobs:
     steps:
       - run: sudo apt install make gcc libcriterion-dev # Add more deps when needed
       - uses: actions/checkout@v4
-      - run: DEBUG=1 ASAN=1 ANALYZER=1 LTO=0 make tests_run
+      - run: make
+        env:
+          MC_VERSION: 1.21
+          DEBUG: 1
+          ASAN: 1
+          ANALYZER: 1
+          LTO: 0
       # TODO: Export test coverage
