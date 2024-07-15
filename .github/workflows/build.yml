@@ -25,7 +25,7 @@ jobs:
     steps:
       - run: sudo apt install make gcc libcriterion-dev # Add more deps when needed
       - uses: actions/checkout@v4
-      - run: make
+      - run: make tests_run
         env:
           MC_VERSION: 1.21
           DEBUG: 1
