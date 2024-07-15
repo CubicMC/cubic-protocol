@@ -24,18 +24,21 @@ INC_FLAGS += -Iinclude -Isrc
 
 CPPFLAGS := $(INC_FLAGS) -MMD -MP
 
+ifeq ($(MC_VERSION), 1.21)
+CPPFLAGS += -DCUBIC_MC_VERSION=1.21 -DCUBIC_MC_PROTOCOL=767
+else
+$(error Minecraft version not supported or MC_VERSION env variable not set)
+endif
+
 CXXFLAGS := -Wall
 CXXFLAGS += -Wextra
 CXXFLAGS += -Wconversion
 CXXFLAGS += -std=c++17
 CXXFLAGS += -Wp,-U_FORTIFY_SOURCE
 CXXFLAGS += -Wformat=2
-CXXFLAGS += -MMD -MP
-CXXFLAGS += -fno-builtin
 CXXFLAGS += -pipe
 CXXFLAGS += -march=native -mtune=native
 CXXFLAGS += -Wcast-qual
-CXXFLAGS += -Wconversion
 CXXFLAGS += -Wdisabled-optimization
 CXXFLAGS += -Werror=return-type
 CXXFLAGS += -Winit-self
