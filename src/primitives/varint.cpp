@@ -34,9 +34,6 @@ auto serialize(std::vector<uint8_t> &out, int32_t value) -> void
     assert(size_varint != 0);
     size_t current_size = out.size();
     out.resize(out.size() + size_varint);
-    // -fanalyzer thinks that out.data() can return null after the resize somehow so we just put a
-    // debug assert there to make it happy, and it will disappear in release builds so it's fine
-    assert(out.data() != nullptr);
     serialize(out.data() + current_size, value);
 }
 
