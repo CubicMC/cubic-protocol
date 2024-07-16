@@ -2,6 +2,8 @@ name: clang-format check
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
   pull_request:
 
 jobs:
