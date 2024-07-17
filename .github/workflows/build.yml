@@ -19,6 +19,7 @@ jobs:
           ASAN: 0
           ANALYZER: 0
           LTO: 1
+          NATIVE: 0
       # TODO: Export test coverage
 
   check_linux_test:
@@ -34,4 +35,5 @@ jobs:
           ASAN: 1
           ANALYZER: 1
           LTO: 0
+          NATIVE: 0
       # TODO: Export test coverage
