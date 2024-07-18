@@ -34,8 +34,9 @@
 
 #define CUBIC_END_BASIC_PACKET_SER()                                                       \
     std::array<uint8_t, 5> size_placeholder;                                               \
-    uint8_t size_size = varint::get_num_bytes((int32_t) out.size());                       \
+    const uint8_t size_size = varint::get_num_bytes((int32_t) out.size());                 \
     assert(size_size <= size_placeholder.size());                                          \
+    varint::serialize(size_placeholder.data(), (int32_t) out.size());                      \
     out.insert(out.begin(), size_placeholder.data(), size_placeholder.data() + size_size); \
     return
 
