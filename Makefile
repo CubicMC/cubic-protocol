@@ -2,7 +2,7 @@ TARGET_LIB ?= libcubic-protocol.a
 
 TARGET_TESTS ?= glados
 
-CXX	?=	gcc
+CXX	?=	g++
 
 BUILD_DIR := build
 BUILD_DIR_TESTS := build_tests
@@ -36,8 +36,6 @@ CXXFLAGS += -Wconversion
 CXXFLAGS += -std=c++17
 CXXFLAGS += -Wp,-U_FORTIFY_SOURCE
 CXXFLAGS += -Wformat=2
-CXXFLAGS += -pipe
-CXXFLAGS += -march=native -mtune=native
 CXXFLAGS += -Wcast-qual
 CXXFLAGS += -Wdisabled-optimization
 CXXFLAGS += -Werror=return-type
@@ -63,26 +61,31 @@ ARFLAGS := rcsPv
 
 LDFLAGS :=
 
+ifeq ($(NATIVE), 1)
+CXXFLAGS += -pipe
+CXXFLAGS += -march=native -mtune=native
+endif
+
 ifeq ($(DEBUG), 1)
-        CXXFLAGS += -Og -ggdb
+CXXFLAGS += -Og -ggdb
 else
-        CXXFLAGS += -O3 -DNDEBUG
+CXXFLAGS += -O3 -DNDEBUG
 endif
 
 ifeq ($(LTO), 1)
-        CXXFLAGS += -flto
+CXXFLAGS += -flto
 endif
 
 ifeq ($(ASAN), 1)
-        CXXFLAGS += -fsanitize=address,leak,undefined
-        LDFLAGS += -fsanitize=address,leak,undefined
+CXXFLAGS += -fsanitize=address,leak,undefined
+LDFLAGS += -fsanitize=address,leak,undefined
 endif
 
 # -fanalyzer is quite broken in g++, deactivate by default
 ifeq ($(ANALYZER), 1)
 ifeq ($(CXX), g++)
-	CXXFLAGS += -fanalyzer
-	CXXFLAGS += -Wno-analyzer-use-of-uninitialized-value
+CXXFLAGS += -fanalyzer
+CXXFLAGS += -Wno-analyzer-use-of-uninitialized-value
 endif
 endif
 
